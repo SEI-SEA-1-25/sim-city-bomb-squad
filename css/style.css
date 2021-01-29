@@ -1,28 +1,35 @@
-main {
-    width: 100vw;
-    height: 100vh;
-    background-image: url(../img/simcity.jpg);
-    background-size: cover;
-    background-attachment: fixed;
-
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  main {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#bomb-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../img/simcity.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  
+  .bomb-container {
+    /* display: flex;
+    flex-direction: column; */
     background-color: black;
-    width: 175px;
     height: 400px;
-}
-
-#timer {
+    width: 175px;
+  }
+  
+  #timer {
     color: red;
     font-size: 1.5em;
-}
-
-#reset {
+  }
+  #reset {
     width: 90%;
     margin-top: 5%;
     margin-bottom: 5%;
-}
+  }
+  
