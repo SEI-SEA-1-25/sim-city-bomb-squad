@@ -5,7 +5,7 @@
 /*----- cached element references -----*/
 
 /*----- event listeners -----*/
-
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('loaded!');
-})
+console.log("hello");
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("loaded!");
+});
