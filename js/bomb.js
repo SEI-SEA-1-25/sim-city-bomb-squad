@@ -35,13 +35,29 @@ let timerEl = null
 // reset button
 let resetButtonEl = null
 
+// I want this function to run every second.
 function updateClock() {
-    console.log('countdown the timer!')
+    // console.log('countdown the timer!')
+    // Decrement timeRemaining, if there is no time left, end the game
+    timeRemaining = timeRemaining - 1;
+    if(timeRemaining <= 0) {
+        //end the game
+        endGame(false); // endgame.. we lost
+
+    }
+
+    // Update clock text with the timeRemaining
+    timerEl.textContent = "0:00:" + timeRemaining;
 }
 
 // runs to set up game state
 function initializeGame() {
     console.log('set the game up!')
+    // Set the remaining time variable
+    timeRemaining = INITIAL_TIME;
+
+    // Start the countdown interval
+    countdown = setInterval(updateClock, 1000) // Runs the updateClock() every second
 }
 
 // handles reset button click
@@ -57,6 +73,22 @@ function cutWire(event) {
 // handle game over state 
 function endGame(isGameWon) {
     console.log('END GAME 💣')
+    // Clear the countdown and update gameOver state variable
+    clearInterval(countdown);
+    gameOver = true;
+
+    // If the passed in isGameWon argument is true, set the timer text to green
+    // Otherwise, change the background image to the explosion
+
+    if(isGameWon) {
+        // If we won, change text color to green
+        console.log("Hooray Patrick! We saved the city!")
+        timerEl.style.color = "green"
+    } else {
+        // But if we lost, change the background image to the exploded city pic
+        console.log('Barnacles! The city exploded!')
+        backgroundEl.style.backgroundImage = "url(img/explosion.jpg)";
+    }
 }
 
 /*----- event listeners -----*/
