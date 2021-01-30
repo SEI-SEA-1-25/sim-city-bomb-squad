@@ -52,9 +52,9 @@ function updateClock() {
 
 // runs to set up game state
 function initializeGame() {
-    console.log('set the game up!')
     // Set the remaining time variable
     timeRemaining = INITIAL_TIME;
+    gameOver = false
     wireState = {
         blue: false,
         green: false,
@@ -63,13 +63,15 @@ function initializeGame() {
         yellow: false
     }
     wiresToCut = []
-    Math.floor(Math.random() * 4)
-
-    // for (i = 0; i <= wires.length; i++) {
-
-    // }
     // Start the countdown interval
     countdown = setInterval(updateClock, 1000) // Runs the updateClock() every second
+    //randomly select which wires to cut
+    for (const color in wireState) {
+        let rand = Math.random() //gives a random flaot between 0.0 and 1.0
+        if(rand > 0.5) {
+            wiresToCut.push(color);
+        }
+    }
 }
 
 // handles reset button click
@@ -83,12 +85,29 @@ function resetGame() {
 
 // handles reset button click
 function cutWire(event) {
-    console.log('cut a wire!', event)
-    const wireClicked = null
-    // for (wire of wires){
-    //     if(wire == true)
-    console.log(event.target.id)
-    // }
+    let wireColor = event.target.id
+    console.log("You cut the " + wireColor + " wire")
+    if(!gameOver && wireState[wireColor] == false) {
+        //cut the wire
+        console.log(event.target.src)
+        //change pic to cut wire
+        event.target.src = 'img/cut-$(wireColor}-wire.png'
+        wireState[wireColor] = true;
+
+        if(wiresToCut.includes(wireColor)) {
+            //that was the right color
+            // remove the wire from the wires to cut 
+            wiresToCut.splice(wiresToCut.indexOf(wireColor), 1)
+            if(wiresToCut.length == 0){
+                //no more wires to cut - you win
+                endGame(true);
+            }
+        }
+        else{
+            //wrong wire - end the game
+            endGame(false);
+        }
+    }
 }
 
 // handle game over state 
